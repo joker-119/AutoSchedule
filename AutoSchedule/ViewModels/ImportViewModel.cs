@@ -37,7 +37,8 @@ public partial class ImportViewModel : ObservableObject
     private readonly OcrService ocr;
     private readonly CalendarService cal;
     private readonly AlarmService alarmSvc;
-    
+    private double totalHours;
+
     public ImportViewModel(OcrService ocr, CalendarService cal, AlarmService alarm)
     {
         this.ocr = ocr;
@@ -50,7 +51,19 @@ public partial class ImportViewModel : ObservableObject
     public ObservableCollection<Shift> DraftShifts { get; } = [];
     
     public int ShiftCount => DraftShifts.Count;
-    
+
+    public double TotalHours
+    {
+        get => totalHours;
+        private set
+        {
+            if (value.Equals(totalHours))
+                return;
+            totalHours = value;
+            OnPropertyChanged();
+        }
+    }
+
     private static Page RootPage => Application.Current!.MainPage!;
 
     private static IEnumerable<Shift> Parse(string raw)
@@ -207,9 +220,11 @@ public partial class ImportViewModel : ObservableObject
             await using Stream stream = await file.OpenReadAsync();
             string raw = await ocr.ExtractTextAsync(stream);
 
-            foreach (Shift shift in Parse(raw))
+            foreach (Shift shift in Parse(raw)) 
                 DraftShifts.Add(shift);
 
+            TotalHours = DraftShifts.Sum(s => (s.end - s.start).TotalHours) - (0.5 * DraftShifts.Count);
+            
             if (DraftShifts.Count == 0)
                 await RootPage.DisplayAlert("Nothing recognized", "Couldn't detect any day/time lines in that screenshot.", "OK");
         }

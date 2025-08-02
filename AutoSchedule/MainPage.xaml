@@ -29,6 +29,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <Label Text="{Binding TotalHours, StringFormat='Total: {0:N1} h'}" FontAttributes="Bold" HorizontalOptions="Center"/>
         <Button Text="Add to Calendar" Command="{Binding CommitCommand}" IsEnabled="{Binding ShiftCount, Converter={StaticResource IntToBool}}" />
     </VerticalStackLayout>
 </ContentPage>

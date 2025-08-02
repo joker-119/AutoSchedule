@@ -6,8 +6,6 @@ using AutoSchedule.Services;
 
 using global::Android.Content;
 
-using Google.Common.Util.Concurrent;
-
 public class AlarmRefreshWorker : Worker
 {
     private readonly CalendarService cal;
