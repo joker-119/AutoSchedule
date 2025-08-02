@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AutoSchedule.ViewModels"
+             xmlns:model="clr-namespace:AutoSchedule.Models"
+             x:Class="AutoSchedule.MainPage"
+             x:DataType="vm:ImportViewModel">
+
+    <VerticalStackLayout Spacing="16" Padding="24">
+        <Button Text="Pick Screenshot" Command="{Binding ImportCommand}" />
+
+        <CollectionView ItemsSource="{Binding DraftShifts}" HeightRequest="300">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Shift">
+                    <Grid Padding="8" ColumnDefinitions="*,Auto">
+                        <Label Text="{Binding DayName}" FontAttributes="Bold" />
+                        <Label Grid.Column="1">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding location}" />
+                                    <Span Text=" " />
+                                    <Span Text="{Binding start, StringFormat='{0:t} – '}" />
+                                    <Span Text="{Binding end,   StringFormat='{0:t}'}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Add to Calendar" Command="{Binding CommitCommand}" IsEnabled="{Binding ShiftCount, Converter={StaticResource IntToBool}}" />
+    </VerticalStackLayout>
+</ContentPage>

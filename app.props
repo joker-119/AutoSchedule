@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup Condition="$(BaseProperties) == '' OR $(BaseProperties) == 'true'">
+        <Authors>Joker119</Authors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(BuildProperties) == '' OR $(BuildProperties) == 'true'">
+        <TargetFramework>net9.0-android</TargetFramework>
+        <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+        <UseMaui>true</UseMaui>
+        <OutputType>Exe</OutputType>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <ApplicationId>com.Joker.AutoSchedule</ApplicationId>
+        <ApplicationVersion>1</ApplicationVersion>
+        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+        <RuntimeIdentifier>android-arm64</RuntimeIdentifier>
+        <AndroidEnableDuplicateSoBuildChecks>false</AndroidEnableDuplicateSoBuildChecks>
+        <!--
+          Enables trim analyzers and full trimming during Release mode.
+          To learn more, see: https://learn.microsoft.com/dotnet/core/deploying/trimming/trimming-options#trimming-granularity
+        -->
+        <TrimMode>full</TrimMode>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <OutputPath>../bin/$(Configuration)/</OutputPath>
+        <IncludeCopyLocalFilesOutputGroup>false</IncludeCopyLocalFilesOutputGroup>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- This is the global version and is used for all projects that don't have a version -->
+        <Version Condition="$(Version) == ''">1.1.0</Version>
+        <Nullable>enable</Nullable>
+        
+        <StyleCopVersion>1.1.118</StyleCopVersion>
+
+        <Copyright>Copyright © $(Authors) 2025 - $([System.DateTime]::Now.ToString("yyyy"))</Copyright>
+        <RepositoryType>Git</RepositoryType>
+        <RepositoryUrl>https://github.com/joker-119/AutoSchedule#</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/joker-119/AutoSchedule</PackageProjectUrl>
+        <PackageLicenseExpression>CC-BY-SA-3.0</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+        <DebugType>Portable</DebugType>
+    </PropertyGroup>
+
+    <!-- Disable warning about disabled generation of xml files on debug build -->
+    <PropertyGroup>
+        <NoWarn>$(NoWarn);SA0001</NoWarn>
+        <NoWarn>$(NoWarn);SA1000</NoWarn>
+        <NoWarn>$(NoWarn);SA1520</NoWarn>
+        <NoWarn>$(NoWarn);SA1009</NoWarn>
+        <NoWarn>$(NoWarn);SA1002</NoWarn>
+        <NoWarn>$(NoWarn);SA1600</NoWarn>
+        <NoWarn>$(NoWarn);SA1602</NoWarn>
+        <NoWarn>$(NoWarn);SA1010</NoWarn>
+        <NoWarn>$(NoWarn);SA1013</NoWarn>
+        <NoWarn>$(NoWarn);SA1028</NoWarn>
+        <NoWarn>$(NoWarn);SA1101</NoWarn>
+        <NoWarn>$(NoWarn);SA1011</NoWarn>
+        <NoWarn>$(NoWarn);SA1503</NoWarn>
+        <NoWarn>$(NoWarn);SA1118</NoWarn>
+        <NoWarn>$(NoWarn);SA1633</NoWarn>
+        <NoWarn>$(NoWarn);SA1601</NoWarn>
+        <NoWarn>$(NoWarn);CA1416</NoWarn>
+    </PropertyGroup>
+
+</Project>

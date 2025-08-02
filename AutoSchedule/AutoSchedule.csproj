@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="../app.props" />
+    <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+      <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.90" />
+      <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.10.2" />
+      <PackageReference Include="Xamarin.Google.MLKit.Common" Version="118.11.0.4" />
+      <PackageReference Include="Xamarin.Google.MLKit.TextRecognition" Version="116.0.1.4" />
+      <PackageReference Include="StyleCop.Analyzers" Version="$(StyleCopVersion)" IncludeAssets="All" PrivateAssets="All" />
+    </ItemGroup>
+</Project>
